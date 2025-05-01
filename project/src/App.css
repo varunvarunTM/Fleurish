@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Poppins:wght@300;400;500&display=swap');
+
+:root {
+  --color-primary: #F8BBD0;
+  --color-primary-light: #FFF1F8;
+  --color-primary-dark: #C48B9F;
+  --color-secondary: #C5E1A5;
+  --color-secondary-light: #F8FBE7;
+  --color-secondary-dark: #94AF76;
+  --color-accent: #D1C4E9;
+  --color-accent-light: #F4F0FA;
+  --color-accent-dark: #9F94B7;
+  --color-success: #A5D6A7;
+  --color-warning: #FFE082;
+  --color-error: #EF9A9A;
+  --color-text: #37474F;
+  --color-text-light: #78909C;
+  --color-background: #FFFFFF;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+}
+
+.btn-primary {
+  @apply bg-[#F8BBD0] hover:bg-[#C48B9F] text-white font-medium py-2 px-6 rounded-full transition-all duration-300 shadow-sm;
+}
+
+.btn-secondary {
+  @apply bg-[#C5E1A5] hover:bg-[#94AF76] text-white font-medium py-2 px-6 rounded-full transition-all duration-300 shadow-sm;
+}
+
+.btn-outline {
+  @apply border border-[#F8BBD0] text-[#F8BBD0] hover:bg-[#FFF1F8] font-medium py-2 px-6 rounded-full transition-all duration-300;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg;
+}
+
+.card-hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.bloom-animation {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.bloom-animation:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+}
+
+.section-padding {
+  @apply py-12 md:py-16;
+}
