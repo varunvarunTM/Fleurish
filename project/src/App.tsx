@@ -8,6 +8,8 @@ import CustomBouquet from './pages/CustomBouquet';
 import Checkout from './pages/Checkout';
 import OrderConfirmation from './pages/OrderConfirmation';
 import OrderTracking from './pages/OrderTracking';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 import './App.css';
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/confirmation" element={<OrderConfirmation />} />
           <Route path="/tracking" element={<OrderTracking />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </main>
       <Footer />
