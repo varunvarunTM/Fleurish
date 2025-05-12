@@ -40,7 +40,7 @@ const Header: React.FC = () => {
           <Link to="/" className="flex items-center">
             <Flower className={`mr-2 ${isScrolled ? 'text-[#F8BBD0]' : 'text-[#F8BBD0]'}`} size={28} />
             <span className={`font-serif text-xl md:text-2xl font-bold ${isScrolled ? 'text-[#37474F]' : 'text-[#37474F]'}`}>
-              Bloom & Deliver
+              Fleurish
             </span>
           </Link>
           
