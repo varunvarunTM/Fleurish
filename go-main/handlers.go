@@ -6,6 +6,8 @@ import (
 	"go-api/models"
 	"net/http"
 	"strings"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 // SignupHandler creates a new user
@@ -25,7 +27,15 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Insert the new user into the database
+	// Hash the password before storing
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		http.Error(w, "Error hashing password", http.StatusInternalServerError)
+		return
+	}
+	user.Password = string(hashedPassword)
+
+	// Store user with hashed password
 	_, err = db.Exec("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", user.Name, user.Email, user.Password)
 	if err != nil {
 		http.Error(w, "Error creating user", http.StatusInternalServerError)
@@ -58,7 +68,9 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Validate the password
-	if user.Password != loginData.Password {
+	// Use bcrypt to compare hashed password
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(loginData.Password))
+	if err != nil {
 		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
 		return
 	}
@@ -138,7 +150,6 @@ func CreateProductHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(map[string]string{"message": "Product created successfully"})
 }
-
 
 func GetAllProductsHandler(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query(`

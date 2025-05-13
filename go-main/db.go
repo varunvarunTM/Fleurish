@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"log"
 
-	_ "github.com/mattn/go-sqlite3"
 	"go-api/models"
+
+	_ "github.com/mattn/go-sqlite3"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var db *sql.DB
@@ -64,6 +66,13 @@ func AddUser(user *models.User) error {
 		log.Println("Error checking email:", err)
 		return err
 	}
+
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Println("Error hashing password:", err)
+		return err
+	}
+	user.Password = string(hashedPassword)
 
 	_, err = db.Exec("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", user.Name, user.Email, user.Password)
 	if err != nil {
